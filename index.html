@@ -29,13 +29,13 @@
   <main class="content">
     <!-- HOME -->
     <section id="tab-home" class="tab-content active">
-      <div class="card">
-        <div class="bio" id="bioText"><p class="empty">Загрузка...</p></div>
-      </div>
       <div class="stats-row">
         <div class="stat"><span class="stat-num" id="statPhotos">0</span><span class="stat-lbl">фото</span></div>
         <div class="stat"><span class="stat-num" id="statCards">0</span><span class="stat-lbl">визитки</span></div>
         <div class="stat"><span class="stat-num" id="statConcerts">—</span><span class="stat-lbl">концертов</span></div>
+      </div>
+      <div class="card" id="cardBio"><div class="section-title">📞 Контакты</div>
+        <div id="contactInfo"><p class="empty">Загрузка...</p></div>
       </div>
       <div class="card"><div class="section-title">✨ Обо мне</div>
         <p class="about-text" id="aboutText">Загрузка...</p>
@@ -96,13 +96,13 @@
         </div>
 
         <div class="card">
-          <div class="section-title">✏️ Редактировать био</div>
+          <div class="section-title">✏️ Редактировать</div>
           <form id="bioForm">
-            <div class="field"><label>Краткое описание</label><input type="text" id="bioShort" placeholder="Певица, артистка" maxlength="100"></div>
             <div class="field"><label>О себе</label><textarea id="bioLong" rows="4" placeholder="Расскажите о себе..." style="width:100%;padding:13px 14px;border:1px solid rgba(255,255,255,.06);border-radius:10px;background:rgba(255,255,255,.03);color:#ddd;font-size:14px;outline:none;resize:vertical;font-family:inherit"></textarea></div>
-            <div class="field"><label>Количество концертов</label><input type="number" id="bioConcerts" placeholder="0" min="0"></div>
+            <div class="field"><label>Концертов</label><input type="number" id="bioConcerts" placeholder="0" min="0"></div>
             <button type="submit" class="btn btn-sec">Сохранить</button>
           </form>
+          <p style="font-size:11px;color:#555;margin-top:10px">💡 Имя и контакты берутся из первой визитки</p>
         </div>
       </div>
     </section>
