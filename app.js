@@ -119,11 +119,10 @@ document.addEventListener('DOMContentLoaded',async()=>{
   q('#bioForm').addEventListener('submit',async e=>{
     e.preventDefault();
     await loadDB();
-    cache.bio.short=q('#bioShort').value.trim()||'Певица, артистка';
     cache.bio.long=q('#bioLong').value.trim();
     cache.bio.concerts=parseInt(q('#bioConcerts').value)||0;
     await saveDB();
-    toast('Био сохранено!');
+    toast('Сохранено!');
     renderAll();
   });
 
@@ -153,10 +152,33 @@ function renderAll(){
 }
 
 function renderHome(){
-  q('#bioText').innerHTML='<p>'+esc(cache.bio.short||'Певица, артистка')+'</p>';
+  const c=cache.cards[0];
+  const hbg=q('.header-bg'),av=q('.avatar svg');
+  if(c&&c.imgData){
+    let img=hbg.querySelector('img.bg-img');
+    if(!img){img=document.createElement('img');img.className='bg-img';hbg.prepend(img)}
+    img.src=c.imgData;
+    hbg.classList.add('has-img');
+    if(av)av.style.display='none';
+  }else{
+    const img=hbg.querySelector('img.bg-img');
+    if(img)img.remove();
+    hbg.classList.remove('has-img');
+    if(av)av.style.display='';
+  }
+  const sub=q('.subtitle');
+  sub.textContent=c?esc(c.name):'певица · артистка';
   q('#statPhotos').textContent=cache.photos.length;
   q('#statCards').textContent=cache.cards.length;
   q('#statConcerts').textContent=cache.bio.concerts||'—';
+  q('#contactInfo').innerHTML=c?
+    '<div style="line-height:2">'+
+    '<div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:6px">'+esc(c.name)+'</div>'+
+    (c.phone?'<div>📞 '+esc(c.phone)+'</div>':'')+
+    (c.email?'<div>✉️ <a href="mailto:'+esc(c.email)+'" style="color:#ffd700;text-decoration:none">'+esc(c.email)+'</a></div>':'')+
+    (c.social?'<div>📱 '+esc(c.social)+'</div>':'')+
+    '</div>'
+    :'<p class="empty">Нет данных. Добавьте визитку в админке</p>';
   q('#aboutText').innerHTML=cache.bio.long?cache.bio.long.replace(/\n/g,'<br>'):'<span class="empty">Пока не добавлено</span>';
 }
 
@@ -202,7 +224,6 @@ function renderCards(){
 }
 
 function renderAdmin(){
-  q('#bioShort').value=cache.bio.short||'';
   q('#bioLong').value=cache.bio.long||'';
   q('#bioConcerts').value=cache.bio.concerts||0;
 }
