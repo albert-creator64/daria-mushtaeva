@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Daria Mushtaeva</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div class="header-bg"></div>
+    <div class="header-content">
+      <div class="avatar">
+        <svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="38" fill="none" stroke="rgba(255,215,0,.15)" stroke-width="1"/><text x="40" y="46" text-anchor="middle" font-size="28" fill="#ffd700" font-weight="300" font-family="serif">D</text></svg>
+      </div>
+      <h1>Daria<br>Mushtaeva</h1>
+      <p class="subtitle">певица · артистка</p>
+    </div>
+  </header>
+
+  <nav class="tabs" id="mainTabs">
+    <button class="tab active" data-tab="home">Главная</button>
+    <button class="tab" data-tab="gallery">Галерея</button>
+    <button class="tab" data-tab="cards">Визитки</button>
+    <button class="tab" data-tab="admin">Админ</button>
+  </nav>
+
+  <main class="content">
+    <!-- HOME -->
+    <section id="tab-home" class="tab-content active">
+      <div class="card">
+        <div class="bio" id="bioText"><p class="empty">Загрузка...</p></div>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><span class="stat-num" id="statPhotos">0</span><span class="stat-lbl">фото</span></div>
+        <div class="stat"><span class="stat-num" id="statCards">0</span><span class="stat-lbl">визитки</span></div>
+        <div class="stat"><span class="stat-num" id="statConcerts">—</span><span class="stat-lbl">концертов</span></div>
+      </div>
+      <div class="card"><div class="section-title">✨ Обо мне</div>
+        <p class="about-text" id="aboutText">Загрузка...</p>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="tab-gallery" class="tab-content">
+      <div class="card">
+        <div class="section-title">📸 Галерея</div>
+        <div class="photo-grid" id="photoGrid"><p class="empty">Пока нет фото</p></div>
+      </div>
+    </section>
+
+    <!-- CARDS -->
+    <section id="tab-cards" class="tab-content">
+      <div class="card">
+        <div class="section-title">💳 Визитные карточки</div>
+        <div id="cardsList"><p class="empty">Нет визиток</p></div>
+      </div>
+    </section>
+
+    <!-- ADMIN -->
+    <section id="tab-admin" class="tab-content">
+      <div id="adminLogin">
+        <div class="card">
+          <div class="section-title">🔐 Администратор</div>
+          <form id="adminForm">
+            <div class="field"><label>Пароль</label><input type="password" id="adminPass" placeholder="Введите пароль"></div>
+            <button type="submit" class="btn">Войти</button>
+          </form>
+        </div>
+      </div>
+      <div id="adminPanel" style="display:none">
+        <div class="card">
+          <div class="card-flex"><div class="section-title">⚙️ Панель</div><button id="adminLogout" class="btn-sm">Выйти</button></div>
+        </div>
+
+        <div class="card">
+          <div class="section-title">🖼 Добавить фото</div>
+          <form id="photoForm">
+            <div class="field"><label>Название</label><input type="text" id="photoTitle" placeholder="Например: Концерт в Москве" maxlength="60"></div>
+            <div class="field"><label>Фото</label><input type="file" id="photoInput" accept="image/*"></div>
+            <button type="submit" class="btn btn-sec">Загрузить</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="section-title">💳 Добавить визитку</div>
+          <form id="cardForm">
+            <div class="field"><label>Имя / должность</label><input type="text" id="cardName" placeholder="Дарья Муштаева" maxlength="60"></div>
+            <div class="field"><label>Телефон</label><input type="tel" id="cardPhone" placeholder="+7 (999) 999-99-99"></div>
+            <div class="field"><label>Email</label><input type="email" id="cardEmail" placeholder="daria@example.com"></div>
+            <div class="field"><label>Instagram / соцсеть</label><input type="text" id="cardSocial" placeholder="@daria_mushtaeva"></div>
+            <div class="field"><label>Фото на визитку</label><input type="file" id="cardPhotoInput" accept="image/*"></div>
+            <button type="submit" class="btn btn-sec">Добавить визитку</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="section-title">✏️ Редактировать био</div>
+          <form id="bioForm">
+            <div class="field"><label>Краткое описание</label><input type="text" id="bioShort" placeholder="Певица, артистка" maxlength="100"></div>
+            <div class="field"><label>О себе</label><textarea id="bioLong" rows="4" placeholder="Расскажите о себе..." style="width:100%;padding:13px 14px;border:1px solid rgba(255,255,255,.06);border-radius:10px;background:rgba(255,255,255,.03);color:#ddd;font-size:14px;outline:none;resize:vertical;font-family:inherit"></textarea></div>
+            <div class="field"><label>Количество концертов</label><input type="number" id="bioConcerts" placeholder="0" min="0"></div>
+            <button type="submit" class="btn btn-sec">Сохранить</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+</div>
+
+<!-- Photo modal -->
+<div id="photoModal" class="modal" style="display:none">
+  <span class="modal-close">&times;</span>
+  <img class="modal-img" id="modalImg" src="">
+  <div class="modal-caption" id="modalCaption"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
