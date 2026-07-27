@@ -1,4 +1,4 @@
-const GIT_OWNER='albert-creator64',GIT_REPO='daria-mushtaeva',GIT_PATH='data/db.json';
+﻿const GIT_OWNER='albert-creator64',GIT_REPO='daria-mushtaeva',GIT_PATH='data/db.json';
 const APP_PASS='mushtaeva2024',ADMIN_KEY='daria_admin';
 const GIT_TOKEN='ghp_'+'lQcJqVSfk7kbpdDArjZxsNrIa2mrvA24IVFP';
 const API='https://api.github.com/repos/'+GIT_OWNER+'/'+GIT_REPO+'/contents/'+GIT_PATH;
@@ -155,14 +155,11 @@ function renderHome(){
   const c=cache.cards[0];
   const hbg=q('.header-bg'),av=q('.avatar svg');
   if(c&&c.imgData){
-    let img=hbg.querySelector('img.bg-img');
-    if(!img){img=document.createElement('img');img.className='bg-img';hbg.prepend(img)}
-    img.src=c.imgData;
+    hbg.style.backgroundImage='url("'+c.imgData+'")';
     hbg.classList.add('has-img');
     if(av)av.style.display='none';
   }else{
-    const img=hbg.querySelector('img.bg-img');
-    if(img)img.remove();
+    hbg.style.backgroundImage='';
     hbg.classList.remove('has-img');
     if(av)av.style.display='';
   }
@@ -227,3 +224,4 @@ function renderAdmin(){
   q('#bioLong').value=cache.bio.long||'';
   q('#bioConcerts').value=cache.bio.concerts||0;
 }
+
